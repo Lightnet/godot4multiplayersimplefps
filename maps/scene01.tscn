@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4togpb7eoin8"]
+
+[ext_resource type="Texture2D" uid="uid://cneuuahph6r34" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="1_5cffc"]
+[ext_resource type="Texture2D" uid="uid://dupj2je5pvu24" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="2_xpj0k"]
+[ext_resource type="PackedScene" uid="uid://kb0cish0x40q" path="res://prefabs/gray_grid_cube.tscn" id="3_vao7h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0swlo"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xtr8"]
+albedo_texture = ExtResource("1_5cffc")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_tiugy"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2kdo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujyfd"]
+albedo_texture = ExtResource("2_xpj0k")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_sn8nv"]
+
+[node name="Scene01" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.515528, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_0swlo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_overlay = SubResource("StandardMaterial3D_4xtr8")
+mesh = SubResource("BoxMesh_tiugy")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533496, 2.50076)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_v2kdo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_ujyfd")
+material_overlay = SubResource("StandardMaterial3D_4xtr8")
+mesh = SubResource("BoxMesh_sn8nv")
+skeleton = NodePath("../../StaticBody3D/MeshInstance3D")
+
+[node name="GrayGridCube" parent="." instance=ExtResource("3_vao7h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02389, 0.50765, 2.91797)

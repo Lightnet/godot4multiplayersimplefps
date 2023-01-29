@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://kb0cish0x40q"]
+
+[ext_resource type="Texture2D" uid="uid://dupj2je5pvu24" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="1_cl7ev"]
+[ext_resource type="Texture2D" uid="uid://cneuuahph6r34" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="2_yoeqh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dc26v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vne35"]
+albedo_texture = ExtResource("1_cl7ev")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhf38"]
+albedo_texture = ExtResource("2_yoeqh")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_1vh8y"]
+
+[node name="GrayGridCube" type="Node3D"]
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_dc26v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_vne35")
+material_overlay = SubResource("StandardMaterial3D_hhf38")
+mesh = SubResource("BoxMesh_1vh8y")
+skeleton = NodePath("../../StaticBody3D/MeshInstance3D")
