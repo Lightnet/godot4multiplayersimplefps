@@ -70,7 +70,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-@rpc(any_peer)
+@rpc("any_peer")
 func receive_damage():
 	health -= 1
 	if health <= 0:
@@ -78,7 +78,7 @@ func receive_damage():
 		position = Vector3.ZERO;
 	health_change.emit(health)
 	
-@rpc(call_local)
+@rpc("call_local")
 func play_shoot_effects():
 	anim_player.stop()
 	anim_player.play("shoot")
