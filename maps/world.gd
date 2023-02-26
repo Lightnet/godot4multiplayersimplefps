@@ -1,6 +1,5 @@
 extends Node
 
-
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
@@ -25,6 +24,7 @@ func _on_host_button_pressed():
 	multiplayer.peer_disconnected.connect(remove_player)
 	
 	add_player(multiplayer.get_unique_id())
+	print("server")
 	
 	#upnp_setup()
 
@@ -33,7 +33,11 @@ func _on_join_button_pressed():
 	hud.show()
 	
 	enet_peer.create_client(address_entry.text,PORT)
+	
 	multiplayer.multiplayer_peer = enet_peer
+	multiplayer.peer_disconnected.connect(return_menu)
+	print("client")
+	
 
 func add_player(peer_id):
 	var player = Player.instantiate()
@@ -46,6 +50,13 @@ func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
+		
+func return_menu(peer_id):
+	print("server disconnected!", peer_id)
+	main_menu.show()
+	hud.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	pass
 
 func update_health_bar(health_value):
 	health_bar.value = health_value
